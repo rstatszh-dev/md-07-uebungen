@@ -42,7 +42,7 @@ ghg <- read_csv("daten/ugz_treibhausgasbilanz.csv")
 -   Falls numerisch, diskret oder kontinuierlich?
 -   Falls nicht numerisch, ordinal oder nicht ordinal?
 
-5. Welche Einheit haben die Werte? **Tipp:** Schaut in der originalen Quelle des Datensatzes: https://data.stadt-zuerich.ch/dataset/ugz_treibhausgasbilanz
+5.  Welche Einheit haben die Werte? **Tipp:** Schaut in der originalen Quelle des Datensatzes: https://data.stadt-zuerich.ch/dataset/ugz_treibhausgasbilanz
 
 ```{r}
 glimpse(ghg)
@@ -63,14 +63,13 @@ ghg_long |>
                 values_from = Emissionen) 
 ```
 
+## Daten visualisieren- Säulendiagramm
 
-## Daten visualisieren- Säulendiagramm 
+1.  Erstellt ein Säulen-Diagramm mit der Variable `Jahr` auf der x-Achse und der Variable `Kerosin` auf der y-Achse
 
-1. Erstellt ein Säulen-Diagramm mit der Variable `Jahr` auf der x-Achse und der Variable `Kerosin` auf der y-Achse
+2.  Was stellt das Säulendiagramm dar?
 
-2. Was stellt das Säulendiagramm dar?
-
-3. Was fällt euch auf?
+3.  Was fällt euch auf?
 
 ```{r}
 ggplot(data = ghg,
@@ -78,16 +77,16 @@ ggplot(data = ghg,
     geom_col()
 ```
 
-## Daten visualisieren 
+## Daten visualisieren
 
-1. Render das Dokument und schaue dir folgendes Säulen-Diagramm an. 
+1.  Render das Dokument und schaue dir folgendes Säulen-Diagramm an.
 
 ```{r}
 #| echo: false
 knitr::include_graphics("https://github.com/rstatszh-dev/data/blob/main/images/treibhausgasbilanz-stadt-zuerich.png?raw=true")
 ```
 
-1. Ist es dir möglich das Säulen-Diagramm mit den Daten in `ghg` zu reproduzieren? Falls nein, warum nicht und was ist nötig um das Diagramm zu reproduzieren?
+1.  Ist es dir möglich das Säulen-Diagramm mit den Daten in `ghg` zu reproduzieren? Falls nein, warum nicht und was ist nötig um das Diagramm zu reproduzieren?
 
 ```{r}
 ggplot(data = ghg_long,
@@ -110,4 +109,3 @@ ggplot(data = ghg_long,
           axis.text.x = element_text(angle = 90, 
                                      vjust = 0.5))
 ```
-
