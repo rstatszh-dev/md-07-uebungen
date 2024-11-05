@@ -1,0 +1,80 @@
+---
+title: "Treibhausgase Stadt Zürich"
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  warning: false
+editor_options: 
+  chunk_output_type: console
+editor: visual
+---
+
+## R-Pakete laden
+
+```{r}
+library(tidyverse)
+```
+
+## Daten importieren
+
+### Treibhausgasemissionen Stadt Zürich
+
+Der Datensatz [Treibhausgasemissionen Stadt Zürich, ohne Klimakorrektur, 1990 - 2016](https://opendata.swiss/de/dataset/treibhausgasemissionen-stadt-zurich-ohne-klimakorrektur-1990-20163/resource/0c342b77-ad97-46cf-b138-cb83decf96f3) wurde von "Stadt Zürich - Open Data" publiziert und eine detaillierte Beschreibung des Datensatzes ist hier verfügbar: https://data.stadt-zuerich.ch/dataset/ugz_treibhausgasbilanz
+
+```{r}
+
+ghg <- read_csv("daten/ugz_treibhausgasbilanz.csv")
+
+```
+
+## Daten erkunden
+
+1.  Führe den Code im vorherigen Code-Block aus um die Daten zu importieren.
+
+2.  Wieviele Spalten hat der Datensatz?
+
+3.  Wieviele Zeilen hat der Datensatz?
+
+4.  Nutze die Funktion `glimpse(ghg)` und beschreibe die Variablen Typen
+
+-   Numerisch oder nicht numerisch?
+-   Falls numerisch, diskret oder kontinuierlich?
+-   Falls nicht numerisch, ordinal oder nicht ordinal?
+
+5. Welche Einheit haben die Werte? **Tipp:** Schaut in der originalen Quelle des Datensatzes: https://data.stadt-zuerich.ch/dataset/ugz_treibhausgasbilanz
+
+```{r}
+glimpse(ghg)
+```
+
+## Daten visualisieren- Säulendiagramm 
+
+1. Erstellt ein Säulen-Diagramm mit der Variable `Jahr` auf der x-Achse und der Variable `Kerosin` auf der y-Achse
+
+2. Was stellt das Säulendiagramm dar?
+
+3. Was fällt euch auf?
+
+```{r}
+ggplot(data = ghg,
+       mapping = aes(x = Jahr, y = Kerosin)) +
+  geom_col()
+```
+
+## Daten visualisieren 
+
+1. Render das Dokument und schaue dir folgendes Säulen-Diagramm an. 
+
+```{r}
+#| echo: false
+knitr::include_graphics("https://github.com/rstatszh-dev/data/blob/main/images/treibhausgasbilanz-stadt-zuerich.png?raw=true")
+```
+
+1. Ist es dir möglich das Säulen-Diagramm mit den Daten in `ghg` zu reproduzieren? Falls nein, warum nicht und was ist nötig um das Diagramm zu reproduzieren?
+
+```{r}
+
+```
+
