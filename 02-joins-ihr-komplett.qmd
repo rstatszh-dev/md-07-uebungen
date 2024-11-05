@@ -41,7 +41,17 @@ kundenprofile <- read_csv(file = "daten/supermarkt/kundenprofile.csv")
 3.  Nutze andere Funktionen die dir bekannt sind um die drei Dataframes zu erkunden.
 
 ```{r}
+names(einkaeufe)
+names(preise)
+names(kundenprofile)
 
+nrow(einkaeufe)
+nrow(preise)
+nrow(kundenprofile)
+
+glimpse(einkaeufe)
+glimpse(preise)
+glimpse(kundenprofile)
 ```
 
 ## Daten transformation - Daten zusammenfügen
@@ -59,7 +69,31 @@ Als Erinnerung, die drei Funktionen, die du kennengelernt hast:
 3.  Fahre mit der nächsten Aufgabe fort.
 
 ```{r}
+# Kombination 1
 
+preise |>
+  left_join(einkaeufe)
+
+# Kombination 2
+
+einkaeufe |>
+  left_join(preise)
+
+# Schreibt hier eure Beispiele
+
+# Kombination 3
+
+einkaeufe |>
+  left_join(preise) |>
+  left_join(kundenprofile)
+
+# etc. 
+
+einkaeufe |>
+  left_join(kundenprofile)
+
+kundenprofile |>
+  left_join(einkaeufe)
 ```
 
 ## Daten transformation - Daten zusammenfügen: `einkaeufe_preise`
@@ -69,7 +103,8 @@ Als Erinnerung, die drei Funktionen, die du kennengelernt hast:
 2.  Schaue dir das Ergebnis in `einkaeufe_preise` an und überlege, ob die Zusammenführung erfolgreich war.
 
 ```{r}
-
+einkaeufe_preise <- einkaeufe |>  
+  left_join(preise)
 ```
 
 ## Daten transformieren - Neue Variable erstellen
@@ -79,7 +114,10 @@ Als Erinnerung, die drei Funktionen, die du kennengelernt hast:
 2.  Schaue dir das Ergebnis in `einkaeufe_kosten` an und überlege, ob die Berechnung erfolgreich war.
 
 ```{r}
+einkaeufe_kosten <- einkaeufe_preise |>
+  mutate(kosten = einkauf * preis)
 
+einkaeufe_kosten
 ```
 
 ## Daten transformieren - Zusammenfassen (Bonus)
@@ -89,7 +127,13 @@ Als Erinnerung, die drei Funktionen, die du kennengelernt hast:
 2.  Schaue dir das Ergebnis in `einkaeufe_kosten_sum` an und überlege ob die Zusammenfassung erfolgreich war.
 
 ```{r}
+einkaeufe_kosten_sum <- einkaeufe_kosten |>
+  group_by(kunden_id) |>
+  summarise(
+    summe = sum(kosten)
+  )
 
+einkaeufe_kosten_sum
 ```
 
 ## Daten transformation - Daten zusammenfügen: `kunden_tab`
@@ -99,7 +143,11 @@ Als Erinnerung, die drei Funktionen, die du kennengelernt hast:
 2.  Schaue dir das Ergebnis in `einkaeufe_preise` an und überlege, ob die Zusammenführung erfolgreich war.
 
 ```{r}
+kunden_tab <- einkaeufe_kosten_sum |>
+  left_join(kundenprofile) |>
+  select(ends_with("name"), summe, email)
 
+kunden_tab
 ```
 
 ## Übung 6 - Daten als Tabelle darstellen (Bonus)
@@ -107,19 +155,22 @@ Als Erinnerung, die drei Funktionen, die du kennengelernt hast:
 1.  Nutze das Daten-Objekt `kunden_tab` und den Pipe-Operator um eine Code-Sequenz zu schreiben welche das Objekt `kunden_tab` mit der Funktion `gt()` verbindet.
 
 ```{r}
-
+kunden_tab |>
+  gt()
 ```
 
 2.  Nutze das Daten-Objekt `kunden_tab` und den Pipe-Operator um eine Code-Sequenz zu schreiben welche das Daten-Objekt `kunden_tab` mit der Funktion `datatable()` verbindet.
 
 ```{r}
-
+kunden_tab |>
+  datatable()
 ```
 
 3.  Nutze das Objekt `kunden_tab` und den Pipe-Operator um eine Code-Sequenz zu schreiben welche das Objekt `kunden_tab` mit der Funktion `kable()` verbindet.
 
 ```{r}
-
+kunden_tab |>
+  kable()
 ```
 
 4.  Render das Dokument und schaue dir die Ergebnisse an.
