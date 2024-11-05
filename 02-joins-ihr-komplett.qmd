@@ -138,9 +138,11 @@ einkaeufe_kosten_sum
 
 ## Daten transformation - Daten zusammenfügen: `kunden_tab`
 
-1.  Starte mit dem Daten-Objekt `einkaeufe_kosten_sum` und nutze die Funktion `left_join()` um dieses mit dem Daten-Objekt `kundenprofile` zusammenzufügen. Selektiere dann nur die Spalten 'vorname', 'nachname', 'summe' und 'email'.
+1.  Starte mit dem Daten-Objekt `einkaeufe_kosten_sum` und nutze die Funktion `left_join()` um dieses mit dem Daten-Objekt `kundenprofile` zusammenzufügen.
 
-2.  Schaue dir das Ergebnis in `einkaeufe_preise` an und überlege, ob die Zusammenführung erfolgreich war.
+2.  Wähle dann nur die Spalten `vorname`, `nachname`, `summe` und `email` mit der Funktion `select()` aus.
+
+3.  Schaue dir das Ergebnis in `einkaeufe_preise` an und überlege, ob die Zusammenführung erfolgreich war.
 
 ```{r}
 kunden_tab <- einkaeufe_kosten_sum |>
